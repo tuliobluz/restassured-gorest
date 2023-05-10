@@ -1,0 +1,16 @@
+# User-specific stuff:
+.idea
+.vscode
+
+# System Files
+.DS_Store
+Thumbs.db
+
+build/
+out/
+maven-status/
+surefire-reports/
+test-classes/
+target/
+
+*.iml
