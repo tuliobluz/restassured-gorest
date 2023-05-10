@@ -1,6 +1,6 @@
 package models;
 
-public class CreateUserModel {
+public class UserModel {
 
     private String name;
     private String gender;
@@ -11,7 +11,7 @@ public class CreateUserModel {
         return name;
     }
 
-    public CreateUserModel setName(String name) {
+    public UserModel setName(String name) {
 
         this.name = name;
         return this;
@@ -21,7 +21,7 @@ public class CreateUserModel {
         return gender;
     }
 
-    public CreateUserModel setGender(String gender) {
+    public UserModel setGender(String gender) {
         this.gender = gender;
         return this;
     }
@@ -30,7 +30,7 @@ public class CreateUserModel {
         return email;
     }
 
-    public CreateUserModel setEmail(String email) {
+    public UserModel setEmail(String email) {
         this.email = email;
         return this;
     }
@@ -39,15 +39,15 @@ public class CreateUserModel {
         return status;
     }
 
-    public CreateUserModel setStatus(String status) {
+    public UserModel setStatus(String status) {
         this.status = status;
         return this;
     }
 
-    public CreateUserModel(String name,
-                           String gender,
-                           String email,
-                           String status) {
+    public UserModel(String name,
+                     String gender,
+                     String email,
+                     String status) {
         this.name = name;
         this.gender = gender;
         this.email = email;

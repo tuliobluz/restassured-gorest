@@ -1,6 +1,5 @@
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
-import models.CreateUserModel;
+import helpers.EmailGenerator;
+import models.UserModel;
 import org.junit.jupiter.api.Test;
 import services.GoRestService;
 
@@ -13,11 +12,11 @@ public class CreateUserTests {
     @Test
     public void Users_CreateUsers_Success(){
 
-        CreateUserModel createUserModel = new CreateUserModel("Gino Paloma", "male", "raodmEasdfEST@test.com", "active");
-        GoRestService.createUser(createUserModel)
+        UserModel userModel = new UserModel("Gino Paloma", "male",  EmailGenerator.generateEmail(), "active");
+        GoRestService.createUser(userModel)
                 .then()
                 .statusCode(SC_CREATED)
                 .body("id", notNullValue())
-                .body("name", equalTo(createUserModel.getName()));
+                .body("name", equalTo(userModel.getName()));
     }
 }
