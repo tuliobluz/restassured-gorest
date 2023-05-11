@@ -36,12 +36,15 @@ jobs:
         path: target/site/
         retention-days: 15
   
-  send_sucess_result:
+  send_job_result:
     needs: [backend-test]
     runs-on: ubuntu-latest
     steps:
       - name: Send message from Github
+      - uses: act10ns/slack@v1
+        if: always()
         with:
           channel: '#backend-test'
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
           message: "Job status: ${{ job.status }} "
-    
