@@ -16,9 +16,7 @@ on:
 
 jobs:
   backend-test:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 11
@@ -37,3 +35,13 @@ jobs:
         name: surefire-report
         path: target/site/
         retention-days: 15
+  
+  send_sucess_result:
+    needs: [backend-test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send message from Github
+        with:
+          channel: '#backend-test'
+          message: "Job status: ${{ job.status }} "
+    
