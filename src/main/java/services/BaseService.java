@@ -14,7 +14,7 @@ import java.util.Properties;
 
 public class BaseService {
 
-    private static Properties properties;
+    public static Properties properties;
 
     static {
         properties = new Properties();
@@ -28,6 +28,9 @@ public class BaseService {
 
     protected static RequestSpecification defaultRequestSpecification() {
         String token = properties.getProperty("BEARER_TOKEN");
+        return defaultRequestSpecification(token);
+    }
+    protected static RequestSpecification defaultRequestSpecification(String token) {
         return restAssured()
                 .header("Accept", "application/json" )
                 .header("Content-type", ContentType.JSON)

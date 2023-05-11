@@ -12,6 +12,13 @@ public class GoRestService extends BaseService {
                 .post("users/" );
     }
 
+    public static Response createUnauthorizedUser(final UserModel userModel, String token){
+        return defaultRequestSpecification(token)
+                .body(userModel)
+                .when()
+                .post("users/" );
+    }
+
     public static Response updateUser(int updateUserModel, final UserModel userModel){
 
         return defaultRequestSpecification()
