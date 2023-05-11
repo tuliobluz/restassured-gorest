@@ -4,8 +4,8 @@ import io.restassured.response.Response;
 import models.UserModel;
 
 public class GoRestService extends BaseService {
-    public static Response createUser(final UserModel userModel){
 
+    public static Response createUser(final UserModel userModel){
         return defaultRequestSpecification()
                 .body(userModel)
                 .when()

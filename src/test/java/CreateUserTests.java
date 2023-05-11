@@ -3,8 +3,8 @@ import models.UserModel;
 import org.junit.jupiter.api.Test;
 import services.GoRestService;
 
-import static org.apache.http.HttpStatus.SC_CREATED;
-import static org.apache.http.HttpStatus.SC_UNPROCESSABLE_ENTITY;
+
+import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.Matchers.*;
 
 public class CreateUserTests {
@@ -18,7 +18,9 @@ public class CreateUserTests {
                 .assertThat()
                 .statusCode(SC_CREATED)
                 .body("id", notNullValue())
-                .body("name", equalTo(userModel.getName()));
+                .body("name", equalTo(userModel.getName()))
+                .body("gender", equalTo(userModel.getGender()))
+                .body("email", equalTo(userModel.getEmail()));
     }
 
     @Test

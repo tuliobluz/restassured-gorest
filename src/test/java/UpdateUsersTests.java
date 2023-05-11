@@ -44,4 +44,15 @@ public class UpdateUsersTests {
                 .statusCode(SC_NOT_FOUND)
                 .body("message", Matchers.equalTo("Resource not found"));
     }
+
+    @Test
+    public void testUpdateIdUser(){
+        UserModel userModel = new UserModel("Gino Paloma", "male",  EmailGenerator.generateEmail(), "active");
+        userModel.setId(11111111);
+        GoRestService.updateUser(USER_ID, userModel)
+                .then()
+                .assertThat()
+                .statusCode(SC_OK)
+                .body("id", Matchers.equalTo(USER_ID));
+    }
 }

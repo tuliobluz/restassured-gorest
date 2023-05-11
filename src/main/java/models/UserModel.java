@@ -6,6 +6,7 @@ public class UserModel {
     private String gender;
     private String email;
     private String status;
+    private int id;
 
     public String getName() {
         return name;
@@ -41,6 +42,15 @@ public class UserModel {
 
     public UserModel setStatus(String status) {
         this.status = status;
+        return this;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public UserModel setId(int id) {
+        this.id = id;
         return this;
     }
 

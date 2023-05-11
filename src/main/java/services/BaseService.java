@@ -25,10 +25,11 @@ public class BaseService {
             e.printStackTrace();
         }
     }
-    protected static RequestSpecification defaultRequestSpecification(){
+
+    protected static RequestSpecification defaultRequestSpecification() {
         String token = properties.getProperty("BEARER_TOKEN");
         return restAssured()
-                .header("Accept", "application/json" )        
+                .header("Accept", "application/json" )
                 .header("Content-type", ContentType.JSON)
                 .header("Authorization", "Bearer " + token);
     }
