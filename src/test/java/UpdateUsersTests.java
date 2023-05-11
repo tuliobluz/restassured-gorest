@@ -1,7 +1,7 @@
 import helpers.EmailGenerator;
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Test;
 import models.UserModel;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import services.GoRestService;
 
 import static org.apache.http.HttpStatus.*;
@@ -10,12 +10,16 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.Matchers.contains;
 
 public class UpdateUsersTests {
-    private final int USER_ID = 1533013;
-    private final int INVALID_USER_ID = 1111111;
-    private final String USER_EMAIL = "laurabrown86@gmail.com";
+
+    private static final int USER_ID = 1533013;
+    private static final int INVALID_USER_ID = 1111111;
+    private static final String USER_EMAIL = "laurabrown86@gmail.com";
+
     @Test
-    public void testUpdateUser(){
-        UserModel userModel = new UserModel("Gino Paloma", "male",  EmailGenerator.generateEmail(), "active");
+    @DisplayName("Update user successfully")
+    void testUpdateUser() {
+        UserModel userModel = new UserModel("Gino Paloma", "male", EmailGenerator.generateEmail(), "active");
+
         GoRestService.updateUser(USER_ID, userModel)
                 .then()
                 .assertThat()
@@ -25,8 +29,10 @@ public class UpdateUsersTests {
     }
 
     @Test
-    public void testUpdateDuplicatedEmailUser(){
-        UserModel userModel = new UserModel("Gino Paloma", "male",  USER_EMAIL, "active");
+    @DisplayName("Update user with duplicated Email failure")
+    void testUpdateDuplicatedEmailUser() {
+        UserModel userModel = new UserModel("Gino Paloma", "male", USER_EMAIL, "active");
+
         GoRestService.updateUser(USER_ID, userModel)
                 .then()
                 .assertThat()
@@ -36,23 +42,27 @@ public class UpdateUsersTests {
     }
 
     @Test
-    public void testUpdateInvalidUser(){
-        UserModel userModel = new UserModel("Gino Paloma", "male",  USER_EMAIL, "active");
+    @DisplayName("Update invalid user failure")
+    void testUpdateInvalidUser() {
+        UserModel userModel = new UserModel("Gino Paloma", "male", USER_EMAIL, "active");
+
         GoRestService.updateUser(INVALID_USER_ID, userModel)
                 .then()
                 .assertThat()
                 .statusCode(SC_NOT_FOUND)
-                .body("message", Matchers.equalTo("Resource not found"));
+                .body("message", equalTo("Resource not found"));
     }
 
     @Test
-    public void testUpdateIdUser(){
-        UserModel userModel = new UserModel("Gino Paloma", "male",  EmailGenerator.generateEmail(), "active");
+    @DisplayName("NOT Update user ID")
+    void testUpdateIdUser() {
+        UserModel userModel = new UserModel("Gino Paloma", "male", EmailGenerator.generateEmail(), "active");
         userModel.setId(11111111);
+
         GoRestService.updateUser(USER_ID, userModel)
                 .then()
                 .assertThat()
                 .statusCode(SC_OK)
-                .body("id", Matchers.equalTo(USER_ID));
+                .body("id", equalTo(USER_ID));
     }
 }
