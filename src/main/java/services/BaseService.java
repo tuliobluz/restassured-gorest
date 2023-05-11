@@ -10,6 +10,7 @@ import static io.restassured.RestAssured.given;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.Properties;
 
 public class BaseService {
@@ -27,7 +28,8 @@ public class BaseService {
     }
 
     protected static RequestSpecification defaultRequestSpecification() {
-        String token = properties.getProperty("BEARER_TOKEN");
+        String token = getPropertyValue("BEARER_TOKEN");
+        System.out.print(token);
         return defaultRequestSpecification(token);
     }
     protected static RequestSpecification defaultRequestSpecification(String token) {
@@ -45,5 +47,13 @@ public class BaseService {
         return given()
                 .config(RestAssuredConfig.config()
                         .encoderConfig(EncoderConfig.encoderConfig().appendDefaultContentCharsetToContentTypeIfUndefined(false)));
+    }
+
+    private static String getPropertyValue(String propertyName) {
+        String value = properties.getProperty(propertyName);
+        if (value == null || value.trim().isEmpty()) {
+            value = System.getenv(propertyName);
+        }
+        return value;
     }
 }
