@@ -41,8 +41,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send message from Github
-      - uses: act10ns/slack@v1
-        if: always()
+        uses: act10ns/slack@v1
         with:
           channel: '#backend-test'
           message: "Job status: ${{ job.status }} "
+        if: always()
