@@ -45,6 +45,4 @@ jobs:
         if: always()
         with:
           channel: '#backend-test'
-          status: ${{ job.status }}
-          steps: ${{ toJson(steps) }}
           message: "Job status: ${{ job.status }} "
