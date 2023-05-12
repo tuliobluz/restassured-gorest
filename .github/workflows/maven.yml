@@ -38,12 +38,13 @@ jobs:
         path: target/site/
         retention-days: 15
 
-  slackNotification:
+  slack_success_result:
     name: Slack Notification
     runs-on: ubuntu-latest
+    if: $${{ success() }}
     steps:
       - uses: actions/checkout@v2
-      - name: Slack Notification
+      - name: Send success message GitHub
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
