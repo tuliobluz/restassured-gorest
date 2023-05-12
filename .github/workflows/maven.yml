@@ -39,6 +39,7 @@ jobs:
         retention-days: 15
 
   slack_success_result:
+    needs: [backend-test]
     name: Slack Notification
     runs-on: ubuntu-latest
     if: $${{ success() }}
