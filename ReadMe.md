@@ -66,10 +66,13 @@ The project uses hardcoded values for the `USER_ID` and `USER_EMAIL` parameters 
 
 The project includes a GitHub Actions workflow that runs the tests and generates the Surefire report on every push or pull request. The workflow is defined in the `.github/workflows/tests.yml` file. The Surefire report is uploaded as an artifact and can be accessed from the summary of the workflow run.
 
+## Slack Integration
+
+After running the backend and frontend tests, the GitHub Actions workflow sends a message to Slack channels. Currently, the message is sent only when the job succeeds. In a real scenario, notifications can be sent for both successful and failed jobs.
+
+If you want to join the Slack channel for integration, please use the following invitation link: [Slack Invitation Link](https://join.slack.com/t/github-integrationhq/shared_invite/zt-1uzcgmgde-j6JNKORGMNZgAI2ayyvUYg)
+
+
 ## Refactoring Opportunities
 
-The `GoRestService` class has two methods that could be refactored into a single method that can be reused in different places: `createUser` and `createUnauthorizedUser`.
-
-## License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+- The `GoRestService` class has two methods that could be refactored into a single method that can be reused in different places: `createUser` and `createUnauthorizedUser`.
